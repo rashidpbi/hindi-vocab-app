@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <title>Hindi Shabdkosh - Learn Hindi Vocabulary</title>
+  <meta name="description" content="A simple, interactive, and offline-friendly Hindi vocabulary trainer with revision lists, smart flashcards, and quizzes. Built for Malayalis and English speakers.">
+  
+  <!-- Tailwind CSS not requested; using custom main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  
+  <!-- Inline script to prevent theme flashing on load -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <!-- Top Header -->
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">हि</div>
+        <h1 class="logo-text">Hindi Shabdkosh</h1>
+      </div>
+      <div class="header-actions">
+        <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Dark Mode">
+          <!-- Sun Icon (shown in dark theme) -->
+          <svg id="sun-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <!-- Moon Icon (shown in light theme) -->
+          <svg id="moon-icon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button id="admin-panel-btn" class="icon-btn" aria-label="Admin Settings">
+          <!-- Key / Settings Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Area -->
+    <main>
+      
+      <!-- 1. FLASHCARDS SCREEN -->
+      <section id="flashcard-screen" class="tab-content active">
+        <div class="summary-bar">
+          <div class="stat-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Starred: <span id="flashcard-favorites-count">0</span>
+          </div>
+          <button id="card-direction-btn" class="direction-toggle">Hindi → Translation</button>
+        </div>
+
+        <div class="flashcards-container">
+          <div class="flashcard-wrapper" id="vocab-card-wrapper" role="button" aria-label="Flashcard. Click to flip.">
+            <div class="flashcard">
+              
+              <!-- Front Side -->
+              <div class="card-face card-front">
+                <div class="card-header">
+                  <span class="card-index" id="card-index-front">1 / 50</span>
+                  <button class="favorite-btn" id="favorite-btn-front" aria-label="Add to favorites">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  </button>
+                </div>
+                <div class="card-body">
+                  <span class="card-label" id="card-label-front">Hindi</span>
+                  <span class="card-word-hindi" id="card-word-front">रविवार</span>
+                  <span class="card-pronunciation" id="card-pronunciation-front">Ravivaar</span>
+                  <button class="speak-btn" id="speak-btn-front" aria-label="Listen Pronunciation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                  </button>
+                </div>
+                <div class="card-footer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                  Tap Card to Reveal Meaning
+                </div>
+              </div>
+
+              <!-- Back Side -->
+              <div class="card-face card-back">
+                <div class="card-header">
+                  <span class="card-index" id="card-index-back">1 / 50</span>
+                  <button class="favorite-btn" id="favorite-btn-back" aria-label="Add to favorites">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  </button>
+                </div>
+                <div class="card-body">
+                  <span class="card-label" id="card-label-back">Meaning</span>
+                  <span class="card-word-malayalam" id="card-word-back-malayalam">ഞായറാഴ്ച</span>
+                  <span class="card-word-english" id="card-word-back-english">Sunday</span>
+                </div>
+                <div class="card-footer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                  Tap Card to Flip Back
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="card-controls">
+            <button id="prev-card-btn" class="circle-btn" aria-label="Previous Word">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button id="random-card-btn" class="circle-btn" aria-label="Shuffle Cards">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.2 0 2.3.6 3 1.7l1.1 1.6"/><path d="m15.4 12.8 1.2 1.7c.8 1.1 2 1.7 3.2 1.7H22"/><path d="m18 14 4 4-4 4"/></svg>
+            </button>
+            <button id="next-card-btn" class="circle-btn" aria-label="Next Word">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. QUIZ SCREEN -->
+      <section id="quiz-screen" class="tab-content">
+        
+        <!-- Setup / Settings state -->
+        <div class="quiz-setup" id="quiz-setup-panel">
+          <h2 class="setup-title">Vocabulary Quiz</h2>
+          <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: -10px;">Test your knowledge in a random shuffled sequence. Run through all vocabulary once.</p>
+          
+          <div class="option-group">
+            <span class="option-label">Quiz Direction</span>
+            <div class="radio-tiles">
+              <div class="radio-tile selected" id="tile-dir-hj" data-direction="h-to-t">
+                <input type="radio" name="quiz-dir" id="rad-hj" checked>
+                <div class="tile-info">
+                  <span class="tile-title">Hindi → Translation</span>
+                  <span class="tile-desc">Identify the meaning of the Hindi word</span>
+                </div>
+              </div>
+              <div class="radio-tile" id="tile-dir-jh" data-direction="t-to-h">
+                <input type="radio" name="quiz-dir" id="rad-jh">
+                <div class="tile-info">
+                  <span class="tile-title">Translation → Hindi</span>
+                  <span class="tile-desc">Identify the Hindi spelling for the meaning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <span class="option-label">Word Scope</span>
+            <div class="radio-tiles">
+              <div class="radio-tile selected" id="tile-scope-all" data-scope="all">
+                <input type="radio" name="quiz-scope" id="rad-scope-all" checked>
+                <div class="tile-info">
+                  <span class="tile-title">All Words</span>
+                  <span class="tile-desc">Include all words in the collection</span>
+                </div>
+              </div>
+              <div class="radio-tile" id="tile-scope-favs" data-scope="favorites">
+                <input type="radio" name="quiz-scope" id="rad-scope-favs">
+                <div class="tile-info">
+                  <span class="tile-title">Starred Words Only</span>
+                  <span class="tile-desc">Practice words you have bookmarked</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="start-quiz-btn" class="primary-btn" style="margin-top: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            Start Quiz
+          </button>
+        </div>
+
+        <!-- Active Quiz panel -->
+        <div class="quiz-active" id="quiz-game-panel" style="display: none;">
+          <div class="quiz-progress-wrapper">
+            <div class="progress-info">
+              <span>Question <span id="quiz-current-idx">1</span> of <span id="quiz-total-questions">50</span></span>
+              <span>Streak: <span id="quiz-streak-count" style="color: var(--warning); font-weight:700;">0 🔥</span></span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="quiz-progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="quiz-card">
+            <span class="quiz-question-label" id="quiz-prompt-label">Select Translation for:</span>
+            <span class="quiz-question-hindi" id="quiz-question-text">हिम्मत</span>
+            <span class="card-pronunciation" id="quiz-question-pronunciation" style="margin-top: 4px;">Himmat</span>
+          </div>
+
+          <div class="quiz-options" id="quiz-options-container">
+            <!-- 4 Multiple choice buttons injected here -->
+          </div>
+
+          <div class="quiz-status-feedback" id="quiz-status-feedback"></div>
+        </div>
+
+        <!-- Completion panel -->
+        <div class="quiz-results" id="quiz-results-panel" style="display: none;">
+          <span class="result-emoji" id="quiz-result-emoji">🎉</span>
+          <h2 class="result-title" id="quiz-result-title">Excellent Job!</h2>
+          <p id="quiz-result-feedback" style="color: var(--text-secondary); margin-top: -10px;">You are mastering Hindi vocabulary!</p>
+          
+          <div class="result-score-circle">
+            <span class="result-score-num" id="quiz-result-score">48</span>
+            <span class="result-score-max">out of <span id="quiz-result-total">50</span></span>
+          </div>
+
+          <div class="result-stats">
+            <div class="result-stat-card">
+              <div class="result-stat-val correct" id="quiz-result-accuracy">96%</div>
+              <div class="result-stat-lbl">Accuracy</div>
+            </div>
+            <div class="result-stat-card">
+              <div class="result-stat-val streak" id="quiz-result-maxstreak">12 🔥</div>
+              <div class="result-stat-lbl">Max Streak</div>
+            </div>
+          </div>
+
+          <button id="restart-quiz-btn" class="primary-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.72 2.78L21 8"/><path d="M21 3v5h-5"/></svg>
+            Practice Again
+          </button>
+        </div>
+
+      </section>
+
+      <!-- 3. REVISION SCREEN -->
+      <section id="revision-screen" class="tab-content">
+        
+        <!-- Controls & Search -->
+        <div class="revision-controls">
+          <div class="search-wrapper">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="revision-search" class="search-input" placeholder="Search in Hindi, Malayalam, or English...">
+          </div>
+
+          <div class="filter-row">
+            <button id="chip-filter-all" class="filter-chip active">All Words</button>
+            <button id="chip-filter-starred" class="filter-chip">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Starred Only
+            </button>
+            <button id="chip-sort-mode" class="filter-chip">A-Z Order</button>
+            <button id="chip-toggle-meanings" class="filter-chip active">Meanings: Show</button>
+          </div>
+        </div>
+
+        <!-- Encourage quote -->
+        <div class="encouragement-banner" id="revision-encouragement-banner">
+          <p id="revision-banner-text">"मेहनत का फल मीठा होता है।" (The fruit of hard work is sweet.)</p>
+        </div>
+
+        <!-- Vocabulary Rows -->
+        <div id="revision-word-list" class="word-list">
+          <!-- Injected dynamically -->
+        </div>
+
+        <div id="revision-empty-state" class="empty-state" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.3 21a8.7 8.7 0 0 1-7-14.5A8.8 8.8 0 0 1 19.8 13"/><path d="M22 22l-4.3-4.3"/><path d="M15 8h.01"/><path d="M10 8h.01"/><path d="M9.5 13.5c.5 1 1.5 1.5 2.5 1.5s2-.5 2.5-1.5"/></svg>
+          <h3>No Words Found</h3>
+          <p>Try adjusting your search criteria or bookmark some words!</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Sticky Navigation Tabs -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" id="tab-btn-flashcards" data-target="flashcard-screen">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+        Flashcards
+      </button>
+      <button class="nav-tab" id="tab-btn-quiz" data-target="quiz-screen">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Quiz
+      </button>
+      <button class="nav-tab" id="tab-btn-revision" data-target="revision-screen">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+        Revision
+      </button>
+    </nav>
+  </div>
+
+  <!-- ADMIN DIALOG (PASSWORD & CODE GENERATOR) -->
+  <div class="modal-backdrop" id="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Admin Code Helper</h2>
+        <button class="word-row-btn" id="close-admin-btn" aria-label="Close dialog">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+        </button>
+      </div>
+      
+      <!-- Password Challenge -->
+      <div class="modal-body" id="admin-auth-panel">
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">This tool helps you format new words into Javascript syntax. To unlock, enter the password:</p>
+        <div class="form-group">
+          <label for="admin-password">Admin Password</label>
+          <input type="password" id="admin-password" class="form-input" placeholder="Enter password (default: shabdkosh)">
+        </div>
+        <button id="admin-login-btn" class="primary-btn">Unlock Helper</button>
+      </div>
+
+      <!-- Word Entry & Code Generator Form -->
+      <div class="modal-body" id="admin-form-panel" style="display: none;">
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">Fill out the form below to generate the exact JS object to add to your <code>data.js</code> file.</p>
+        
+        <div class="form-group">
+          <label for="new-word-hindi">Hindi Word *</label>
+          <input type="text" id="new-word-hindi" class="form-input" placeholder="e.g. हिम्मत">
+        </div>
+        
+        <div class="form-group">
+          <label for="new-word-pronunciation">Phonetic Pronunciation (English) *</label>
+          <input type="text" id="new-word-pronunciation" class="form-input" placeholder="e.g. Himmat">
+        </div>
+
+        <div class="form-group">
+          <label for="new-word-malayalam">Malayalam Meaning *</label>
+          <input type="text" id="new-word-malayalam" class="form-input" placeholder="e.g. ധൈര്യം">
+        </div>
+
+        <div class="form-group">
+          <label for="new-word-english">English Meaning (Optional)</label>
+          <input type="text" id="new-word-english" class="form-input" placeholder="e.g. Courage">
+        </div>
+
+        <button id="generate-code-btn" class="primary-btn">Generate Object Code</button>
+
+        <div class="form-group" id="code-output-group" style="display: none; margin-top: 10px;">
+          <label>Generated Object (Copy & Append to <code>vocabData</code> in <code>js/data.js</code>):</label>
+          <div class="code-output-box" id="generated-code-box"></div>
+          <button id="copy-code-btn" class="primary-btn" style="padding: 8px 14px; font-size: 0.85rem; align-self: flex-end; margin-top: 6px;">Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Toast Dialog -->
+  <div class="toast" id="app-toast">Copied to clipboard!</div>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Main JavaScript App module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
