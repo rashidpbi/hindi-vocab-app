@@ -183,7 +183,7 @@ class App {
       }
     });
     
-    // Code Generator Elements
+    // Word Entry Elements
     const hindiIn = document.getElementById('new-word-hindi');
     const pronIn = document.getElementById('new-word-pronunciation');
     const malIn = document.getElementById('new-word-malayalam');
@@ -194,6 +194,41 @@ class App {
     const outputBox = document.getElementById('generated-code-box');
     const copyBtn = document.getElementById('copy-code-btn');
     
+    // GitHub API Config Elements
+    const githubPatIn = document.getElementById('github-pat');
+    const githubRepoIn = document.getElementById('github-repo');
+    const githubBranchIn = document.getElementById('github-branch');
+    const githubDetails = document.getElementById('github-config-details');
+    const addToGithubBtn = document.getElementById('add-to-github-btn');
+    
+    // Load config from localStorage
+    githubPatIn.value = localStorage.getItem('github_pat') || '';
+    githubRepoIn.value = localStorage.getItem('github_repo') || '';
+    githubBranchIn.value = localStorage.getItem('github_branch') || 'main';
+    
+    // Auto-detect repo if hosted on GitHub pages and repo isn't set yet
+    if (!githubRepoIn.value && window.location.hostname.endsWith('.github.io')) {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const owner = window.location.hostname.split('.')[0];
+      const repo = parts[0] || '';
+      if (owner && repo) {
+        githubRepoIn.value = `${owner}/${repo}`;
+        localStorage.setItem('github_repo', githubRepoIn.value);
+      }
+    }
+    
+    // Event listeners to save configs
+    githubPatIn.addEventListener('change', () => {
+      localStorage.setItem('github_pat', githubPatIn.value.trim());
+    });
+    githubRepoIn.addEventListener('change', () => {
+      localStorage.setItem('github_repo', githubRepoIn.value.trim());
+    });
+    githubBranchIn.addEventListener('change', () => {
+      localStorage.setItem('github_branch', githubBranchIn.value.trim());
+    });
+
+    // Offline Generate Code listener
     genBtn.addEventListener('click', () => {
       const hindi = hindiIn.value.trim();
       const pron = pronIn.value.trim();
@@ -219,12 +254,168 @@ class App {
       // Display snippet block
       outputBox.textContent = `  ${formattedJson},`;
       outputGroup.style.display = 'flex';
+      outputGroup.scrollIntoView({ behavior: 'smooth' });
     });
     
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(outputBox.textContent)
         .then(() => this.showToast('Code block copied! Copy-paste into js/data.js'))
         .catch(() => this.showToast('Failed to copy to clipboard'));
+    });
+
+    // Add to GitHub listener
+    addToGithubBtn.addEventListener('click', async () => {
+      const hindi = hindiIn.value.trim();
+      const pron = pronIn.value.trim();
+      const mal = malIn.value.trim();
+      const eng = engIn.value.trim();
+      
+      if (!hindi || !pron || !mal) {
+        this.showToast('Fields marked with * are required');
+        return;
+      }
+      
+      const pat = githubPatIn.value.trim();
+      const repo = githubRepoIn.value.trim();
+      const branch = githubBranchIn.value.trim() || 'main';
+      
+      if (!pat || !repo) {
+        githubDetails.open = true;
+        this.showToast('Please configure GitHub Settings first!');
+        githubDetails.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      
+      // Disable UI elements during write
+      const inputs = [hindiIn, pronIn, malIn, engIn, githubPatIn, githubRepoIn, githubBranchIn];
+      const buttons = [addToGithubBtn, genBtn];
+      
+      inputs.forEach(i => i.disabled = true);
+      buttons.forEach(b => b.disabled = true);
+      const originalText = addToGithubBtn.innerHTML;
+      addToGithubBtn.innerHTML = `
+        <svg class="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+        Adding Word...
+      `;
+      
+      try {
+        const url = `https://api.github.com/repos/${repo}/contents/js/data.js?ref=${branch}`;
+        
+        // 1. Fetch current file content and SHA
+        const getRes = await fetch(url, {
+          headers: {
+            'Authorization': `token ${pat}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        
+        if (!getRes.ok) {
+          throw new Error(`Failed to fetch js/data.js from repo. Status: ${getRes.status} ${getRes.statusText}`);
+        }
+        
+        const fileData = await getRes.json();
+        const sha = fileData.sha;
+        const base64Content = fileData.content.replace(/\s/g, '');
+        const decodedText = decodeURIComponent(escape(window.atob(base64Content)));
+        
+        // 2. Parse existing array from file content
+        const startIdx = decodedText.indexOf('[');
+        const endIdx = decodedText.lastIndexOf(']');
+        if (startIdx === -1 || endIdx === -1) {
+          throw new Error('Could not parse vocabData array syntax from js/data.js');
+        }
+        
+        const arrayStr = decodedText.substring(startIdx, endIdx + 1);
+        let list;
+        try {
+          list = new Function(`return ${arrayStr};`)();
+        } catch (e) {
+          throw new Error(`Failed to parse vocabulary array syntax: ${e.message}`);
+        }
+        
+        if (!Array.isArray(list)) {
+          throw new Error('Fetched vocabulary is not an array.');
+        }
+        
+        // 3. Increment ID and push new word
+        const newId = Math.max(...list.map(w => w.id), 0) + 1;
+        const newWordObj = {
+          id: newId,
+          hindi,
+          pronunciation: pron,
+          malayalam: mal,
+          english: eng || undefined
+        };
+        list.push(newWordObj);
+        
+        // 4. Format and base64-encode updated file content
+        const updatedContent = `export const vocabData = ${JSON.stringify(list, null, 2)};\n`;
+        const encodedContent = window.btoa(unescape(encodeURIComponent(updatedContent)));
+        
+        // 5. Commit changes to GitHub
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/js/data.js`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${pat}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: `Add vocabulary word: ${hindi} (${pron})`,
+            content: encodedContent,
+            sha: sha,
+            branch: branch
+          })
+        });
+        
+        if (!putRes.ok) {
+          const errBody = await putRes.json().catch(() => ({}));
+          throw new Error(errBody.message || `Failed to commit to GitHub (Status ${putRes.status})`);
+        }
+        
+        // 6. Update local memory states so changes are immediately visible
+        this.vocabList = list;
+        
+        // Update state in revision module
+        if (this.revision) {
+          this.revision.vocabList = list; 
+          this.revision.state.randomizedList = [...list];
+          this.revision.render();
+        }
+        
+        // Update state in flashcards module
+        if (this.flashcards) {
+          this.flashcards.vocabList = list;
+          if (this.flashcards.state.isShuffled) {
+            this.flashcards.state.shuffledList.push(newWordObj);
+          } else {
+            this.flashcards.state.shuffledList = [...list];
+          }
+          this.flashcards.updateCard();
+        }
+        
+        // Update stats
+        this.updateStats();
+        
+        // Show success and reset form
+        this.showToast('Word added to live site! Rebuild triggered 🚀');
+        
+        // Clean fields
+        hindiIn.value = '';
+        pronIn.value = '';
+        malIn.value = '';
+        engIn.value = '';
+        if (outputGroup) outputGroup.style.display = 'none';
+        
+      } catch (error) {
+        console.error(error);
+        alert(`Failed to add word:\n${error.message}`);
+      } finally {
+        // Re-enable everything
+        inputs.forEach(i => i.disabled = false);
+        buttons.forEach(b => b.disabled = false);
+        addToGithubBtn.innerHTML = originalText;
+      }
     });
     
     // Check URL parameters for fast admin bypass

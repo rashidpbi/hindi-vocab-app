@@ -310,7 +310,29 @@
 
       <!-- Word Entry & Code Generator Form -->
       <div class="modal-body" id="admin-form-panel" style="display: none;">
-        <p style="color: var(--text-secondary); font-size: 0.85rem;">Fill out the form below to generate the exact JS object to add to your <code>data.js</code> file.</p>
+        <!-- GitHub Configuration (Collapsible) -->
+        <details id="github-config-details" style="margin-bottom: 12px; border: 1px solid var(--border-glass); padding: 12px 14px; border-radius: 8px; background-color: var(--bg-glass);">
+          <summary style="font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--primary); outline: none; user-select: none;">GitHub Integration Settings (Live Adding)</summary>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+            <div class="form-group">
+              <label for="github-pat">Personal Access Token (PAT) *</label>
+              <input type="password" id="github-pat" class="form-input" placeholder="ghp_xxxxxxxxxxxx">
+            </div>
+            <div class="form-group">
+              <label for="github-repo">Repository (owner/repo) *</label>
+              <input type="text" id="github-repo" class="form-input" placeholder="e.g. username/repo-name">
+            </div>
+            <div class="form-group">
+              <label for="github-branch">Branch</label>
+              <input type="text" id="github-branch" class="form-input" placeholder="main" value="main">
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.3;">
+              The PAT needs <code>contents:write</code> permission on this repository. It is saved securely only in your browser's local storage.
+            </p>
+          </div>
+        </details>
+
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 5px;">Fill out the vocabulary fields below:</p>
         
         <div class="form-group">
           <label for="new-word-hindi">Hindi Word *</label>
@@ -332,7 +354,15 @@
           <input type="text" id="new-word-english" class="form-input" placeholder="e.g. Courage">
         </div>
 
-        <button id="generate-code-btn" class="primary-btn">Generate Object Code</button>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+          <button id="add-to-github-btn" class="primary-btn" style="background: linear-gradient(135deg, var(--accent), var(--primary-hover));">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Add Word to Live Site
+          </button>
+          <button id="generate-code-btn" class="primary-btn" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); box-shadow: none;">
+            Generate Object Code (Offline)
+          </button>
+        </div>
 
         <div class="form-group" id="code-output-group" style="display: none; margin-top: 10px;">
           <label>Generated Object (Copy & Append to <code>vocabData</code> in <code>js/data.js</code>):</label>
