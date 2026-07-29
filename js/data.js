@@ -348,5 +348,40 @@ export const vocabData = [
     pronunciation: "Sabzi",
     malayalam: "പച്ചക്കറി",
     english: "Vegetable"
-  }
+  },
+  {
+    id: 51,
+    hindi: "रहना",
+    pronunciation: "Rahna",
+    malayalam: "താമസിക്കുക",
+    english: "stay"
+  },
+  {
+    id: 52,
+    hindi: "यक़ीन",
+    pronunciation: "Yaqīn",
+    malayalam: "വിശ്വാസം",
+    english: "faith"
+  },
+    {
+    id: 53,
+    hindi: "सफलता",
+    pronunciation: "Safaltha",
+    malayalam: "വിജയം",
+    english: "victory"
+  },
+  {
+    id: 54,
+    hindi: "उठना",
+    pronunciation: "udna",
+    malayalam: "എഴുന്നേൽക്കുക",
+    english: "wake up"
+  },
+    {
+    id: 55,
+    hindi: "दुकान",
+    pronunciation: "dukan",
+    malayalam: "കട",
+    english: "shop"
+  },  
 ];
