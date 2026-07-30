@@ -397,5 +397,12 @@ export const vocabData = [
     "pronunciation": "terna",
     "malayalam": "നീന്തുക",
     "english": "to swim"
+  },
+  {
+    "id": 58,
+    "hindi": "मारना",
+    "pronunciation": "mārnā",
+    "malayalam": "അടിക്കുക",
+    "english": "beat"
   }
 ];
