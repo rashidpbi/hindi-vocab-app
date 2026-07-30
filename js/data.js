@@ -383,5 +383,12 @@ export const vocabData = [
     "pronunciation": "dukan",
     "malayalam": "കട",
     "english": "shop"
+  },
+  {
+    "id": 56,
+    "hindi": "सच",
+    "pronunciation": "sach",
+    "malayalam": "സത്യം",
+    "english": "truth"
   }
 ];
