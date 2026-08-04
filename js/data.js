@@ -486,5 +486,12 @@ export const vocabData = [
     "pronunciation": "anda",
     "malayalam": "കോഴി മുട്ട",
     "english": "egg"
+  },
+  {
+    "id": 71,
+    "hindi": "इजाज़त",
+    "pronunciation": "Ijāzat",
+    "malayalam": "അനുമതി",
+    "english": "Permission"
   }
 ];
