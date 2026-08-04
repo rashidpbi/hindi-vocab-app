@@ -514,5 +514,11 @@ export const vocabData = [
     "pronunciation": "shahr",
     "malayalam": "നഗരം",
     "english": "city"
+  },
+  {
+    "id": 75,
+    "hindi": "पकाना",
+    "pronunciation": "to cook",
+    "malayalam": "പാചകം ചെയ്യുക.."
   }
 ];
