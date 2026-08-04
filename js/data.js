@@ -548,5 +548,12 @@ export const vocabData = [
     "pronunciation": "Fursat",
     "malayalam": "ഒഴിവുസമയം",
     "english": "free time"
+  },
+  {
+    "id": 80,
+    "hindi": "रसोई",
+    "pronunciation": "rasoi",
+    "malayalam": "അടുക്കള",
+    "english": "kitchen"
   }
 ];
