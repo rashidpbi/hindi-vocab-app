@@ -416,5 +416,12 @@ export const vocabData = [
     "hindi": "जूता",
     "pronunciation": "jootha",
     "malayalam": "ചെരുപ്പ്"
+  },
+  {
+    "id": 61,
+    "hindi": "सेब",
+    "pronunciation": "seb",
+    "malayalam": "ആപ്പിൾ",
+    "english": "apple"
   }
 ];
