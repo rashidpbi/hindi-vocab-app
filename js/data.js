@@ -520,5 +520,12 @@ export const vocabData = [
     "hindi": "पकाना",
     "pronunciation": "to cook",
     "malayalam": "പാചകം ചെയ്യുക.."
+  },
+  {
+    "id": 76,
+    "hindi": "समझौता",
+    "pronunciation": "samjotha",
+    "malayalam": "ഒത്തുതീർപ്പ് / കരാർ",
+    "english": "Settlement / Compromise"
   }
 ];
