@@ -444,5 +444,12 @@ export const vocabData = [
     "pronunciation": "Sīkh",
     "malayalam": "പാഠം / പഠിപ്പ്",
     "english": "lesson/ learning"
+  },
+  {
+    "id": 65,
+    "hindi": "केले",
+    "pronunciation": "kele",
+    "malayalam": "ഏത്തപ്പഴം",
+    "english": "banana"
   }
 ];
