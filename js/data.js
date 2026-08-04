@@ -465,5 +465,12 @@ export const vocabData = [
     "pronunciation": "gahrayi",
     "malayalam": "ആഴം",
     "english": "depth"
+  },
+  {
+    "id": 68,
+    "hindi": "चलाना",
+    "pronunciation": "chalānā",
+    "malayalam": "ഓടിക്കുക",
+    "english": "to drive"
   }
 ];
