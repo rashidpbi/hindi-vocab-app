@@ -562,5 +562,12 @@ export const vocabData = [
     "pronunciation": "rājnīti",
     "malayalam": "രാഷ്ട്രീയം",
     "english": "politics"
+  },
+  {
+    "id": 82,
+    "hindi": "साजिश",
+    "pronunciation": "saajish",
+    "malayalam": "ഗൂഢാലോചന",
+    "english": "Conspiracy"
   }
 ];
