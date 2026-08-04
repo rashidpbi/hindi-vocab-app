@@ -1,4 +1,6 @@
 export function initQuiz(app) {
+  const QUESTION_TIME_LIMIT = 15;
+
   const state = {
     direction: 'h-to-t', // 'h-to-t' or 't-to-h'
     scope: 'all',        // 'all' or 'favorites'
@@ -7,7 +9,9 @@ export function initQuiz(app) {
     score: 0,
     currentStreak: 0,
     maxStreak: 0,
-    canAnswer: true
+    canAnswer: true,
+    timeLeft: 0,
+    timerInterval: null
   };
 
   const encouragingPhrases = [
@@ -38,6 +42,8 @@ export function initQuiz(app) {
   const questionPron = document.getElementById('quiz-question-pronunciation');
   const optionsContainer = document.getElementById('quiz-options-container');
   const statusFeedback = document.getElementById('quiz-status-feedback');
+  const timerCount = document.getElementById('quiz-timer-count');
+  const timerBar = document.getElementById('quiz-timer-bar');
 
   // Results DOM
   const resEmoji = document.getElementById('quiz-result-emoji');
@@ -192,11 +198,65 @@ export function initQuiz(app) {
       btn.addEventListener('click', () => handleAnswer(btn, option, correctVal));
       optionsContainer.appendChild(btn);
     });
+
+    startQuestionTimer(correctVal);
+  }
+
+  function updateTimerUI() {
+    if (!timerCount || !timerBar) return;
+    timerCount.textContent = `${state.timeLeft}s`;
+    
+    const percentage = (state.timeLeft / QUESTION_TIME_LIMIT) * 100;
+    timerBar.style.width = `${percentage}%`;
+
+    // Apply color thresholds
+    timerBar.classList.remove('warning', 'danger');
+    if (state.timeLeft <= 3) {
+      timerBar.classList.add('danger');
+      timerCount.style.color = 'var(--danger)';
+    } else if (state.timeLeft <= 7) {
+      timerBar.classList.add('warning');
+      timerCount.style.color = 'var(--warning)';
+    } else {
+      timerCount.style.color = '';
+    }
+  }
+
+  function startQuestionTimer(correctValue) {
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+    }
+    
+    state.timeLeft = QUESTION_TIME_LIMIT;
+    
+    // Jump instantly to 100% width
+    if (timerBar) {
+      timerBar.style.transition = 'none';
+      timerBar.style.width = '100%';
+      timerBar.offsetHeight; // Force reflow
+      timerBar.style.transition = '';
+    }
+    
+    updateTimerUI();
+
+    state.timerInterval = setInterval(() => {
+      state.timeLeft--;
+      if (state.timeLeft <= 0) {
+        clearInterval(state.timerInterval);
+        handleAnswer(null, null, correctValue);
+      } else {
+        updateTimerUI();
+      }
+    }, 1000);
   }
 
   function handleAnswer(selectedBtn, chosenValue, correctValue) {
     if (!state.canAnswer) return;
     state.canAnswer = false;
+
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+    }
 
     const isCorrect = (chosenValue === correctValue);
 
@@ -241,9 +301,11 @@ export function initQuiz(app) {
         });
       }
     } else {
-      selectedBtn.classList.add('incorrect');
+      if (selectedBtn) {
+        selectedBtn.classList.add('incorrect');
+      }
       state.currentStreak = 0;
-      statusFeedback.textContent = "गलत जवाब (Wrong answer)";
+      statusFeedback.textContent = chosenValue === null ? "समय समाप्त (Time's up!)" : "गलत जवाब (Wrong answer)";
       statusFeedback.classList.add('incorrect');
     }
 
@@ -261,6 +323,9 @@ export function initQuiz(app) {
   }
 
   function showResults() {
+    if (state.timerInterval) {
+      clearInterval(state.timerInterval);
+    }
     gamePanel.style.display = 'none';
     resultsPanel.style.display = 'flex';
 
@@ -318,6 +383,11 @@ export function initQuiz(app) {
   }
 
   return {
-    state
+    state,
+    stopTimer: () => {
+      if (state.timerInterval) {
+        clearInterval(state.timerInterval);
+      }
+    }
   };
 }

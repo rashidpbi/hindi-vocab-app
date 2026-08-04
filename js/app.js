@@ -103,6 +103,10 @@ class App {
   }
   
   switchTab(targetId, tabEl) {
+    if (targetId !== 'quiz-screen' && this.quiz && typeof this.quiz.stopTimer === 'function') {
+      this.quiz.stopTimer();
+    }
+
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     
