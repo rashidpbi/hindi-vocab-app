@@ -527,5 +527,12 @@ export const vocabData = [
     "pronunciation": "samjotha",
     "malayalam": "ഒത്തുതീർപ്പ് / കരാർ",
     "english": "Settlement / Compromise"
+  },
+  {
+    "id": 77,
+    "hindi": "शाम",
+    "pronunciation": "shaam",
+    "malayalam": "വൈകുന്നേരം",
+    "english": "evening"
   }
 ];
