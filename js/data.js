@@ -437,5 +437,12 @@ export const vocabData = [
     "pronunciation": "peena",
     "malayalam": "കുടിക്കുക",
     "english": "drink"
+  },
+  {
+    "id": 64,
+    "hindi": "सीख",
+    "pronunciation": "Sīkh",
+    "malayalam": "പാഠം / പഠിപ്പ്",
+    "english": "lesson/ learning"
   }
 ];
