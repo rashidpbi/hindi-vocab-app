@@ -555,5 +555,12 @@ export const vocabData = [
     "pronunciation": "rasoi",
     "malayalam": "അടുക്കള",
     "english": "kitchen"
+  },
+  {
+    "id": 81,
+    "hindi": "राजनीति",
+    "pronunciation": "rājnīti",
+    "malayalam": "രാഷ്ട്രീയം",
+    "english": "politics"
   }
 ];
