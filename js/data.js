@@ -479,5 +479,12 @@ export const vocabData = [
     "pronunciation": "kann",
     "malayalam": "കണ്ണ്",
     "english": "eye"
+  },
+  {
+    "id": 70,
+    "hindi": "अंडा",
+    "pronunciation": "anda",
+    "malayalam": "കോഴി മുട്ട",
+    "english": "egg"
   }
 ];
