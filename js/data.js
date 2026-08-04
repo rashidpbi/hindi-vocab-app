@@ -458,5 +458,12 @@ export const vocabData = [
     "pronunciation": "Manzil",
     "malayalam": "ലക്ഷ്യം / ലക്ഷ്യസ്ഥാനം",
     "english": "destination / goal"
+  },
+  {
+    "id": 67,
+    "hindi": "गहराई",
+    "pronunciation": "gahrayi",
+    "malayalam": "ആഴം",
+    "english": "depth"
   }
 ];
