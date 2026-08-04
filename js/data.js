@@ -575,5 +575,12 @@ export const vocabData = [
     "hindi": "साजिश",
     "pronunciation": "saajish",
     "malayalam": "ഗൂഢാലോചന"
+  },
+  {
+    "id": 84,
+    "hindi": "असर",
+    "pronunciation": "Asar",
+    "malayalam": "സ്വാധീനം / ഫലം",
+    "english": "impact"
   }
 ];
