@@ -582,5 +582,12 @@ export const vocabData = [
     "pronunciation": "Asar",
     "malayalam": "സ്വാധീനം / ഫലം",
     "english": "impact"
+  },
+  {
+    "id": 85,
+    "hindi": "नहाना",
+    "pronunciation": "nahana",
+    "malayalam": "കുളിക്കുക",
+    "english": "to bath"
   }
 ];
