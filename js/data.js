@@ -595,5 +595,12 @@ export const vocabData = [
     "hindi": "परवाह",
     "pronunciation": "Parvāh",
     "malayalam": "കാര്യമാക്കൽ ,ശ്രദ്ധ, പരിഗണന."
+  },
+  {
+    "id": 87,
+    "hindi": "प्रश्न",
+    "pronunciation": "prashn",
+    "malayalam": "ചോദ്യം",
+    "english": "question"
   }
 ];
