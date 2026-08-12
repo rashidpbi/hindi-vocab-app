@@ -589,5 +589,11 @@ export const vocabData = [
     "pronunciation": "nahana",
     "malayalam": "കുളിക്കുക",
     "english": "to bath"
+  },
+  {
+    "id": 86,
+    "hindi": "परवाह",
+    "pronunciation": "Parvāh",
+    "malayalam": "കാര്യമാക്കൽ ,ശ്രദ്ധ, പരിഗണന."
   }
 ];
