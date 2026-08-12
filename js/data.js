@@ -602,5 +602,12 @@ export const vocabData = [
     "pronunciation": "prashn",
     "malayalam": "ചോദ്യം",
     "english": "question"
+  },
+  {
+    "id": 88,
+    "hindi": "दवा",
+    "pronunciation": "dhava",
+    "malayalam": "മരുന്ന്",
+    "english": "medicine"
   }
 ];
