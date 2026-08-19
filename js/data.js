@@ -616,5 +616,362 @@ export const vocabData = [
     "pronunciation": "jawab",
     "malayalam": "ഉത്തരം",
     "english": "answer"
+  }, 
+  {
+    "id": 90,
+    "hindi": "रसोई",
+    "pronunciation": "rasoi",
+    "malayalam": "അടുക്കള",
+    "english": "kitchen"
+  },
+  {
+    "id": 91,
+    "hindi": "राजनीति",
+    "pronunciation": "rajniti",
+    "malayalam": "രാഷ്ട്രീയം",
+    "english": "politics"
+  },
+  {
+    "id": 92,
+    "hindi": "शिक्षक",
+    "pronunciation": "shikshak",
+    "malayalam": "അധ്യാപകൻ",
+    "english": "teacher"
+  },
+  {
+    "id": 93,
+    "hindi": "साजिश",
+    "pronunciation": "sajish",
+    "malayalam": "ഗൂഢാലോചന",
+    "english": "conspiracy"
+  },
+  {
+    "id": 94,
+    "hindi": "असर",
+    "pronunciation": "asar",
+    "malayalam": "സ്വാധീനം / ഫലം",
+    "english": "effect"
+  },
+  {
+    "id": 95,
+    "hindi": "नहाना",
+    "pronunciation": "nahana",
+    "malayalam": "കുളിക്കുക",
+    "english": "to bathe"
+  },
+  {
+    "id": 96,
+    "hindi": "परवाह",
+    "pronunciation": "parvah",
+    "malayalam": "കാര്യമാക്കൽ / ശ്രദ്ധ / പരിഗണന",
+    "english": "care / concern"
+  },
+  {
+    "id": 97,
+    "hindi": "प्रश्न",
+    "pronunciation": "prashn",
+    "malayalam": "ചോദ്യം",
+    "english": "question"
+  },
+  {
+    "id": 98,
+    "hindi": "दवा",
+    "pronunciation": "dava",
+    "malayalam": "മരുന്ന്",
+    "english": "medicine"
+  },
+  {
+    "id": 99,
+    "hindi": "जवाब",
+    "pronunciation": "jawab",
+    "malayalam": "ഉത്തരം",
+    "english": "answer"
+  },
+  {
+    "id": 100,
+    "hindi": "सीखना",
+    "pronunciation": "seekhna",
+    "malayalam": "പഠിക്കുക",
+    "english": "to learn"
+  },
+  {
+    "id": 101,
+    "hindi": "भूख लगना",
+    "pronunciation": "bhookh lagna",
+    "malayalam": "വിശക്കുക",
+    "english": "to feel hungry"
+  },
+  {
+    "id": 102,
+    "hindi": "लेना",
+    "pronunciation": "lena",
+    "malayalam": "എടുക്കുക / സ്വീകരിക്കുക",
+    "english": "to take / receive"
+  },
+  {
+    "id": 103,
+    "hindi": "ख़याल",
+    "pronunciation": "khayal",
+    "malayalam": "ശ്രദ്ധ / കരുതൽ / ചിന്ത",
+    "english": "care / thought"
+  },
+  {
+    "id": 104,
+    "hindi": "छूना",
+    "pronunciation": "chhoona",
+    "malayalam": "തൊടുക",
+    "english": "to touch"
+  },
+  {
+    "id": 105,
+    "hindi": "खड़ा होना",
+    "pronunciation": "khada hona",
+    "malayalam": "നിൽക്കുക",
+    "english": "to stand"
+  },
+  {
+    "id": 106,
+    "hindi": "खोलना",
+    "pronunciation": "kholna",
+    "malayalam": "തുറക്കുക",
+    "english": "to open"
+  },
+  {
+    "id": 107,
+    "hindi": "आवाज़",
+    "pronunciation": "aawaz",
+    "malayalam": "ശബ്ദം / സ്വരം",
+    "english": "voice / sound"
+  },
+  {
+    "id": 108,
+    "hindi": "ज़िम्मेदारी",
+    "pronunciation": "zimmedari",
+    "malayalam": "ഉത്തരവാദിത്തം",
+    "english": "responsibility"
+  },
+  {
+    "id": 109,
+    "hindi": "अफ़वाह",
+    "pronunciation": "afwah",
+    "malayalam": "വ്യാജവാർത്ത / കിംവദന്തി",
+    "english": "rumor"
+  },
+  {
+    "id": 110,
+    "hindi": "मिलना",
+    "pronunciation": "milna",
+    "malayalam": "കണ്ടുമുട്ടുക",
+    "english": "to meet"
+  },
+  {
+    "id": 111,
+    "hindi": "साफ़ करना",
+    "pronunciation": "saaf karna",
+    "malayalam": "വൃത്തിയാക്കുക",
+    "english": "to clean"
+  },
+  {
+    "id": 112,
+    "hindi": "फ़ैसला",
+    "pronunciation": "faisla",
+    "malayalam": "തീരുമാനം",
+    "english": "decision"
+  },
+  {
+    "id": 113,
+    "hindi": "बताना",
+    "pronunciation": "batana",
+    "malayalam": "പറയുക / അറിയിക്കുക",
+    "english": "to tell / inform"
+  },
+  {
+    "id": 114,
+    "hindi": "वजह",
+    "pronunciation": "wajah",
+    "malayalam": "കാരണം",
+    "english": "reason"
+  },
+  {
+    "id": 115,
+    "hindi": "देर",
+    "pronunciation": "der",
+    "malayalam": "താമസം / വൈകി",
+    "english": "delay / late"
+  },
+  {
+    "id": 116,
+    "hindi": "सोचना",
+    "pronunciation": "sochna",
+    "malayalam": "ചിന്തിക്കുക",
+    "english": "to think"
+  },
+  {
+    "id": 117,
+    "hindi": "मौसम",
+    "pronunciation": "mausam",
+    "malayalam": "കാലാവസ്ഥ",
+    "english": "weather"
+  },
+  {
+    "id": 118,
+    "hindi": "चिंता",
+    "pronunciation": "chinta",
+    "malayalam": "വിഷമം / ആശങ്ക",
+    "english": "worry / concern"
+  },
+  {
+    "id": 119,
+    "hindi": "भरोसा",
+    "pronunciation": "bharosa",
+    "malayalam": "വിശ്വാസം",
+    "english": "trust"
+  },
+  {
+    "id": 120,
+    "hindi": "झूठ",
+    "pronunciation": "jhooth",
+    "malayalam": "കള്ളം",
+    "english": "lie"
+  },
+  {
+    "id": 121,
+    "hindi": "बुरा",
+    "pronunciation": "bura",
+    "malayalam": "മോശം",
+    "english": "bad"
+  },
+  {
+    "id": 122,
+    "hindi": "खींचना",
+    "pronunciation": "kheenchna",
+    "malayalam": "വലിക്കുക / ഫോട്ടോ എടുക്കുക",
+    "english": "to pull / to take a photo"
+  },
+  {
+    "id": 123,
+    "hindi": "पुराना",
+    "pronunciation": "purana",
+    "malayalam": "പഴയത്",
+    "english": "old"
+  },
+  {
+    "id": 124,
+    "hindi": "आसान",
+    "pronunciation": "aasan",
+    "malayalam": "എളുപ്പമുള്ളത്",
+    "english": "easy"
+  },
+  {
+    "id": 125,
+    "hindi": "पहनना",
+    "pronunciation": "pahenna",
+    "malayalam": "ധരിക്കുക",
+    "english": "to wear"
+  },
+  {
+    "id": 126,
+    "hindi": "फ़िक्र",
+    "pronunciation": "fikr",
+    "malayalam": "ആശങ്ക / ചിന്ത",
+    "english": "worry / concern"
+  },
+  {
+    "id": 127,
+    "hindi": "दाँत साफ़ करना",
+    "pronunciation": "daant saaf karna",
+    "malayalam": "പല്ല് തേക്കുക",
+    "english": "to brush one's teeth"
+  },
+  {
+    "id": 128,
+    "hindi": "रोज़",
+    "pronunciation": "roz",
+    "malayalam": "എല്ലാ ദിവസവും / ദിവസവും",
+    "english": "every day / daily"
+  },
+  {
+    "id": 129,
+    "hindi": "अपने",
+    "pronunciation": "apne",
+    "malayalam": "സ്വന്തം / തന്റെ",
+    "english": "one's own"
+  },
+  {
+    "id": 130,
+    "hindi": "गंदा",
+    "pronunciation": "ganda",
+    "malayalam": "വൃത്തിയില്ലാത്ത / അഴുക്കായ",
+    "english": "dirty"
+  },
+  {
+    "id": 131,
+    "hindi": "घड़ी",
+    "pronunciation": "ghadi",
+    "malayalam": "ക്ലോക്ക് / ഘടികാരം",
+    "english": "clock / watch"
+  },
+  {
+    "id": 132,
+    "hindi": "वादा",
+    "pronunciation": "vada",
+    "malayalam": "വാഗ്ദാനം",
+    "english": "promise"
+  },
+  {
+    "id": 133,
+    "hindi": "मुकाबला",
+    "pronunciation": "muqabla",
+    "malayalam": "മത്സരം / പോരാട്ടം",
+    "english": "competition / contest"
+  },
+  {
+    "id": 134,
+    "hindi": "भारी",
+    "pronunciation": "bhaari",
+    "malayalam": "ഭാരമുള്ള",
+    "english": "heavy"
+  },
+  {
+    "id": 135,
+    "hindi": "हल्का",
+    "pronunciation": "halka",
+    "malayalam": "ഭാരം കുറഞ്ഞ / ലഘുവായ",
+    "english": "light"
+  },
+  {
+    "id": 136,
+    "hindi": "उँगली",
+    "pronunciation": "ungli",
+    "malayalam": "വിരൽ",
+    "english": "finger"
+  },
+  {
+    "id": 137,
+    "hindi": "मुमकिन",
+    "pronunciation": "mumkin",
+    "malayalam": "സാധ്യമായ / സാധിക്കും",
+    "english": "possible"
+  },
+  {
+    "id": 138,
+    "hindi": "ज़ोर से",
+    "pronunciation": "zor se",
+    "malayalam": "ഉറക്കെ / ശക്തമായി",
+    "english": "loudly / forcefully"
+  },
+  {
+    "id": 139,
+    "hindi": "ठंडा",
+    "pronunciation": "thanda",
+    "malayalam": "തണുത്ത",
+    "english": "cold"
+  },
+  {
+    "id": 140,
+    "hindi": "पंखा",
+    "pronunciation": "pankha",
+    "malayalam": "ഫാൻ",
+    "english": "fan"
   }
 ];
